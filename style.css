@@ -2,21 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :root {
-    /* Paleta Glassmorphism y Verde */
-    --primary-color: #32ff7e; /* Verde Neón para acentos (Nota, Títulos) */
-    --secondary-color: #52ff32; /* Verde más brillante para éxito */
-    --danger-color: #ff5555; /* Rojo Brillante para error (Alto contraste) */
-    --bg-card: rgba(0, 0, 0, 0.2); /* Fondo de tarjeta más oscuro y transparente */
-    --text-color: #d9ffea; /* Texto principal (Verde muy sutil, casi blanco) */
+    /* Paleta Temática Wicked (Elphaba Green & Glinda Gold) */
+    --primary-color: #00cc66; /* Verde Esmeralda/Neón de Elphaba */
+    --secondary-color: #ffcc00; /* Oro para éxito/detalles (Glinda/Logo) */
+    --danger-color: #ff5555; /* Rojo Brillante para error */
+    --bg-card: rgba(0, 0, 0, 0.4); /* Fondo de tarjeta oscuro y transparente */
+    --text-color: #e0e0e0; /* Texto principal claro */
     --text-dark: #0a1c0d; /* Texto oscuro (para input fields) */
-    --border-glass: rgba(255, 255, 255, 0.3); /* Borde transparente */
-    --shadow-glass: 0 8px 32px 0 rgba(10, 20, 10, 0.5); /* Sombra de vidrio sutil */
+    --border-glass: rgba(255, 255, 255, 0.2); /* Borde transparente más oscuro */
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.6); /* Sombra de vidrio oscura y dramática */
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    /* FONDO ROSADO SOLICITADO */
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); /* Gradiente de rosa a rojo claro */
+    /* Fondo Oscuro y Dramático (Cielo de Oz / Noche) */
+    background: linear-gradient(135deg, #1b0020 0%, #001f3f 100%);
     color: var(--text-color);
     display: flex;
     justify-content: center;
@@ -29,7 +29,7 @@ body {
 
 .card-container {
     background: var(--bg-card);
-    backdrop-filter: blur(10px); /* Efecto Glassmorphism: desenfoque */
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 16px;
     box-shadow: var(--shadow-glass);
@@ -41,8 +41,8 @@ body {
 }
 
 .card-container:hover {
-    box-shadow: 0 8px 32px 0 rgba(50, 255, 126, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(0, 204, 102, 0.3); /* Un toque de verde en el hover */
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* --- Encabezados y Títulos --- */
@@ -53,12 +53,13 @@ header {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2.2em;
     font-weight: 700;
     color: var(--primary-color);
     margin: 0;
-    /* Efecto Neón/Radiante */
-    text-shadow: 0 0 10px var(--primary-color), 0 0 20px rgba(50, 255, 126, 0.5);
+    /* Efecto Neón Verde de Elphaba (Radiante) */
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px rgba(0, 204, 102, 0.5);
+    text-transform: capitalize; /* Asegura el formato de mayúsculas y minúsculas */
 }
 
 h3, h4 {
@@ -81,7 +82,7 @@ label {
     margin-bottom: 8px;
     font-weight: 400;
     font-size: 0.9em;
-    color: var(--primary-color);
+    color: var(--primary-color); /* Labels en verde */
 }
 
 input[type="text"] {
@@ -93,7 +94,7 @@ input[type="text"] {
     font-size: 1em;
     color: var(--text-dark);
     /* Fondo de input ligeramente transparente */
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     transition: all 0.3s;
 }
 
@@ -101,7 +102,7 @@ input[type="text"]:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 10px var(--primary-color);
-    background-color: #ffffff; /* Menos transparencia al enfocar */
+    background-color: #ffffff;
 }
 
 /* Mensajes de error */
@@ -126,23 +127,23 @@ input[type="text"]:focus {
     margin-top: 20px;
     transition: all 0.3s ease-in-out;
     letter-spacing: 0.5px;
-    /* Estilo para que el botón parezca un "vidrio" elevado */
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Estilo Glassmorphism para el botón */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: var(--text-color);
 }
 
 .primary-btn {
-    background: var(--primary-color); /* Color sólido para el botón principal */
+    background: var(--primary-color); /* Botón principal en Verde Elphaba */
     color: var(--text-dark); /* Texto muy oscuro sobre el botón brillante */
-    box-shadow: 0 4px 15px rgba(50, 255, 126, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 204, 102, 0.4);
     border: none;
 }
 
 .primary-btn:hover {
-    background-color: #27cc65;
+    background-color: #00b359;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(50, 255, 126, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 204, 102, 0.6);
 }
 
 /* --- Resultado Final --- */
@@ -164,7 +165,7 @@ input[type="text"]:focus {
     line-height: 1.1;
     margin-bottom: 5px;
     color: var(--primary-color);
-    text-shadow: 0 0 8px rgba(50, 255, 126, 0.5);
+    text-shadow: 0 0 8px rgba(0, 204, 102, 0.7); /* Sombra Verde Neón intensa */
 }
 
 #notaNecesaria {
@@ -177,11 +178,11 @@ input[type="text"]:focus {
     border-radius: 4px;
     font-size: 1em;
     color: var(--text-color);
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Estilos condicionales para el mensaje */
-#mensajeNecesaria[style*="#52ff32"] { /* Éxito (Verde Brillante) */
+#mensajeNecesaria[style*="#ffcc00"] { /* Éxito (Gold/Glinda) */
     color: var(--secondary-color) !important;
     text-shadow: 0 0 5px var(--secondary-color);
 }

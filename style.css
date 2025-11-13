@@ -1,169 +1,169 @@
-/* Importar fuente Inter para un look moderno y limpio */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+/* Importar fuente Roboto Mono para un toque más técnico/moderno */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap');
 
 :root {
-    /* Paleta de colores minimalista */
-    --primary-color: #2c3e50; /* Azul muy oscuro/Gris grafito, para un toque elegante */
-    --accent-color: #3498db; /* Azul cielo, para acentuar elementos (botones, focus) */
-    --success-color: #27ae60; /* Verde, para aprobado */
-    --danger-color: #e74c3c; /* Rojo, para reprobado/error */
-    --bg-main: #fcfcfc; /* Fondo principal muy claro */
-    --card-bg: #ffffff; /* Fondo de la tarjeta limpio */
-    --text-color: #333333; /* Texto oscuro y legible */
-    --border-color: #e0e0e0; /* Bordes suaves */
-    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+    /* Paleta de Colores de Alto Contraste (Casi Dark Mode) */
+    --primary-color: #00bcd4; /* Cian/Turquesa vibrante para acento */
+    --secondary-color: #ff9800; /* Naranja para advertencias */
+    --danger-color: #f44336; /* Rojo para reprobado */
+    --success-color: #8bc34a; /* Verde para éxito */
+    --bg-main: #1e1e1e; /* Fondo muy oscuro (casi negro) */
+    --card-bg: #2d2d30; /* Fondo de tarjeta un poco más claro que el fondo */
+    --text-color: #f0f0f0; /* Texto claro */
+    --border-color: #444444; /* Bordes discretos */
+    --shadow-dark: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra intensa pero suave */
 }
 
 body {
-    font-family: 'Inter', sans-serif; /* Fuente Sans-serif, moderna y legible */
-    background: var(--bg-main); 
+    font-family: 'Roboto Mono', monospace; /* Fuente Monospace para un look técnico */
+    /* Fondo oscuro sólido */
+    background-color: var(--bg-main); 
     color: var(--text-color);
     display: flex;
     justify-content: center;
-    align-items: center; /* Centrado perfecto */
+    align-items: center;
     min-height: 100vh;
     margin: 0;
     padding: 20px;
-    box-sizing: border-box;
 }
 
-/* Contenedor principal - Minimalismo y elegancia */
 .card-container {
     background-color: var(--card-bg);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: var(--shadow-light); /* Sombra suave para "elevar" la tarjeta */
-    border: 1px solid var(--border-color); /* Borde sutil */
+    padding: 35px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-dark); 
+    border-left: 5px solid var(--primary-color); /* Toque de color en el borde lateral */
     width: 100%;
-    max-width: 400px;
-    transition: box-shadow 0.3s ease-in-out;
+    max-width: 450px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
 }
 
 .card-container:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); /* Sombra ligeramente más intensa en hover */
+    transform: scale(1.01);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
 }
 
-/* --- Encabezados y Títulos --- */
 header {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 h1 {
-    font-size: 1.6em;
+    font-size: 2em;
     font-weight: 700;
     color: var(--primary-color);
+    letter-spacing: 2px; /* Espaciado para el título */
     margin: 0;
 }
 
 h3, h4 {
-    color: var(--primary-color);
+    color: var(--text-color);
     font-weight: 600;
     font-size: 1.1em;
-    border-bottom: 1px solid var(--border-color); /* Borde más fino y suave */
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 8px;
     margin-top: 25px;
-    margin-bottom: 15px;
 }
 
-/* --- Entradas de Formulario --- */
 .input-group {
     margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 6px;
-    font-weight: 400; /* Menos negrita */
-    font-size: 0.95em;
-    color: var(--primary-color); /* Color principal para el label */
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 0.9em;
+    color: var(--primary-color); /* El label es del color de acento */
 }
 
 input[type="number"] {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+    color: var(--text-color);
+    background-color: #383838; /* Fondo del input ligeramente más oscuro */
     transition: border-color 0.3s, box-shadow 0.3s;
-    background-color: var(--card-bg);
 }
 
 input[type="number"]:focus {
-    border-color: var(--accent-color);
+    border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* "Ring" de foco sutil */
+    box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.5); 
 }
 
-/* Mensajes de error - Más discretos */
+/* Estilo para los mensajes de error */
 .error-message {
     color: var(--danger-color);
     font-size: 0.8em;
-    font-weight: 400;
+    font-weight: 600;
     margin-top: 5px;
     display: block;
 }
 
-/* --- Botones Outline y Sólidos --- */
+/* --- Botones --- */
 .btn {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    font-weight: 600;
-    margin-top: 20px;
-    transition: all 0.2s ease-in-out;
-    letter-spacing: 0.5px; /* Pequeño espaciado para mejor legibilidad */
+    font-weight: 700;
+    margin-top: 25px;
+    transition: background-color 0.3s, transform 0.1s;
+    text-transform: uppercase; /* Uso de mayúsculas para un look más formal/técnico */
+    letter-spacing: 1px;
 }
 
 .primary-btn {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--card-bg); /* Texto oscuro/casi negro para alto contraste */
 }
 
 .primary-btn:hover {
-    background-color: var(--accent-color);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #00acc1; /* Un poco más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* --- Resultado Final --- */
 .result-box {
     text-align: center;
-    margin-top: 35px;
-    background-color: var(--bg-main);
+    margin-top: 40px;
+    background-color: #383838; /* Fondo oscuro para el resultado */
     padding: 25px;
-    border-radius: 8px;
-    border: 1px dashed var(--border-color); /* Borde punteado para el área de resultado */
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .final-score {
-    font-size: 3.2em;
+    font-size: 4em;
     font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 5px;
+    line-height: 1;
+    margin-bottom: 10px;
     color: var(--primary-color);
 }
 
 #notaNecesaria {
-    color: var(--accent-color);
+    color: var(--secondary-color); /* Usar naranja para resaltar la nota necesaria */
 }
 
 .message {
     font-weight: 600;
     padding: 8px;
-    border-radius: 4px;
+    border-radius: 2px;
     font-size: 0.9em;
 }
 
 /* Estilos condicionales para el mensaje */
-#mensajeNecesaria[style*="#27ae60"] { /* Éxito */
+#mensajeNecesaria[style*="#8bc34a"] { /* Éxito (Verde) */
     color: var(--success-color);
 }
-#mensajeNecesaria[style*="#e74c3c"] { /* Imposible */
+#mensajeNecesaria[style*="#f44336"] { /* Imposible (Rojo) */
     color: var(--danger-color);
 }
 
@@ -172,7 +172,7 @@ input[type="number"]:focus {
     text-align: center;
     margin-top: 15px;
     font-size: 1em;
-    color: #666; /* Texto más suave */
+    color: #aaaaaa; /* Texto gris claro */
 }
 
 #notaFinalMaxima, #notaFinalMinima {
@@ -183,5 +183,5 @@ input[type="number"]:focus {
 hr {
     margin: 30px 0;
     border: 0;
-    border-top: 1px solid var(--border-color); /* Línea sólida sutil */
+    border-top: 1px solid var(--border-color);
 }

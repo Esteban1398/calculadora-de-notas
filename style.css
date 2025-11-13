@@ -15,8 +15,8 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    /* Nuevo fondo profundo de tonos verdes y azules oscuros para el contraste */
-    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    /* FONDO ROSADO SOLICITADO */
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); /* Gradiente de rosa a rojo claro */
     color: var(--text-color);
     display: flex;
     justify-content: center;

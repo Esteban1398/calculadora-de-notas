@@ -26,13 +26,16 @@ body {
     color: var(--text-light);
     display: flex;
     justify-content: center;
-    /* No se usa align-items: center para permitir el scroll si la página crece */
+    /* SOLUCIÓN CLAVE: ELIMINAR align-items: center; para que el contenido se apile normalmente. */
+    /* align-items: center; <-- Removido */
     min-height: 100vh;
     margin: 0;
-    padding: 50px 20px 20px 20px; /* Padding superior para contenido flotante */
+    /* Ajuste de padding superior para asegurar que el contenido empiece correctamente */
+    padding: 50px 20px 20px 20px; 
     box-sizing: border-box;
     position: relative;
-    overflow-x: hidden; /* Permite scroll vertical pero no horizontal */
+    /* Aseguramos que el scroll vertical esté permitido */
+    overflow-x: hidden; 
 }
 
 @keyframes backgroundShift {

@@ -1,111 +1,122 @@
-/* Importar fuente Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+/* Importar fuente Inter para un look moderno y limpio */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :root {
-    --primary-color: #007bff; /* Azul vibrante */
-    --secondary-color: #28a745; /* Verde para éxito */
-    --danger-color: #dc3545; /* Rojo para reprobado */
-    --warning-color: #f0ad4e; /* Naranja para advertencia */
-    --bg-light: #f4f7f9;
-    --card-bg: #ffffff;
-    --text-color: #333;
-    --error-message-color: #e06c75; /* Un rojo más suave */
+    /* Paleta de colores minimalista */
+    --primary-color: #2c3e50; /* Azul muy oscuro/Gris grafito, para un toque elegante */
+    --accent-color: #3498db; /* Azul cielo, para acentuar elementos (botones, focus) */
+    --success-color: #27ae60; /* Verde, para aprobado */
+    --danger-color: #e74c3c; /* Rojo, para reprobado/error */
+    --bg-main: #fcfcfc; /* Fondo principal muy claro */
+    --card-bg: #ffffff; /* Fondo de la tarjeta limpio */
+    --text-color: #333333; /* Texto oscuro y legible */
+    --border-color: #e0e0e0; /* Bordes suaves */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra sutil */
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    /* Nuevo fondo gradiente */
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+    font-family: 'Inter', sans-serif; /* Fuente Sans-serif, moderna y legible */
+    background: var(--bg-main); 
     color: var(--text-color);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Centrado perfecto */
     min-height: 100vh;
     margin: 0;
     padding: 20px;
+    box-sizing: border-box;
 }
 
+/* Contenedor principal - Minimalismo y elegancia */
 .card-container {
     background-color: var(--card-bg);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light); /* Sombra suave para "elevar" la tarjeta */
+    border: 1px solid var(--border-color); /* Borde sutil */
     width: 100%;
-    max-width: 450px;
-    transition: transform 0.3s ease-in-out;
+    max-width: 400px;
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 .card-container:hover {
-    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); /* Sombra ligeramente más intensa en hover */
 }
 
+/* --- Encabezados y Títulos --- */
 header {
     text-align: center;
-    margin-bottom: 30px;
-    color: var(--primary-color);
+    margin-bottom: 25px;
 }
 
 h1 {
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: 700;
-    margin-bottom: 5px;
+    color: var(--primary-color);
+    margin: 0;
 }
 
 h3, h4 {
     color: var(--primary-color);
     font-weight: 600;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
-    margin-top: 20px;
+    font-size: 1.1em;
+    border-bottom: 1px solid var(--border-color); /* Borde más fino y suave */
+    padding-bottom: 8px;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
+/* --- Entradas de Formulario --- */
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 0.9em;
+    margin-bottom: 6px;
+    font-weight: 400; /* Menos negrita */
+    font-size: 0.95em;
+    color: var(--primary-color); /* Color principal para el label */
 }
 
 input[type="number"] {
     width: 100%;
-    padding: 10px 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
     box-sizing: border-box;
     font-size: 1em;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--card-bg);
 }
 
 input[type="number"]:focus {
-    border-color: var(--primary-color);
+    border-color: var(--accent-color);
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* "Ring" de foco sutil */
 }
 
-/* Estilo para los mensajes de error */
+/* Mensajes de error - Más discretos */
 .error-message {
-    color: var(--error-message-color);
+    color: var(--danger-color);
     font-size: 0.8em;
-    font-weight: 600;
+    font-weight: 400;
     margin-top: 5px;
     display: block;
 }
 
-/* --- Botones --- */
+/* --- Botones Outline y Sólidos --- */
 .btn {
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1em;
     font-weight: 600;
-    margin-top: 15px;
-    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 20px;
+    transition: all 0.2s ease-in-out;
+    letter-spacing: 0.5px; /* Pequeño espaciado para mejor legibilidad */
 }
 
 .primary-btn {
@@ -114,41 +125,45 @@ input[type="number"]:focus {
 }
 
 .primary-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--accent-color);
     transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* --- Resultado Final --- */
 .result-box {
     text-align: center;
-    margin-top: 30px;
-    background-color: var(--bg-light);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    margin-top: 35px;
+    background-color: var(--bg-main);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color); /* Borde punteado para el área de resultado */
 }
 
 .final-score {
-    font-size: 3em;
+    font-size: 3.2em;
     font-weight: 700;
-    line-height: 1;
-    margin-bottom: 10px;
+    line-height: 1.1;
+    margin-bottom: 5px;
+    color: var(--primary-color);
 }
 
 #notaNecesaria {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 .message {
     font-weight: 600;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
 }
 
-#mensajeNecesaria[style*="28a745"] { /* Verde para Aprobado */
-    color: var(--secondary-color);
+/* Estilos condicionales para el mensaje */
+#mensajeNecesaria[style*="#27ae60"] { /* Éxito */
+    color: var(--success-color);
 }
-#mensajeNecesaria[style*="dc3545"] { /* Rojo para Imposible */
+#mensajeNecesaria[style*="#e74c3c"] { /* Imposible */
     color: var(--danger-color);
 }
 
@@ -156,7 +171,8 @@ input[type="number"]:focus {
 .goal-calc p {
     text-align: center;
     margin-top: 15px;
-    font-size: 1.1em;
+    font-size: 1em;
+    color: #666; /* Texto más suave */
 }
 
 #notaFinalMaxima, #notaFinalMinima {
@@ -167,5 +183,5 @@ input[type="number"]:focus {
 hr {
     margin: 30px 0;
     border: 0;
-    border-top: 1px dashed #ccc;
+    border-top: 1px solid var(--border-color); /* Línea sólida sutil */
 }

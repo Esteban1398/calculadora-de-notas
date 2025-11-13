@@ -26,16 +26,12 @@ function getCssVariable(variableName) {
  */
 function validarYLimpiar(inputElement) {
     const errorElement = document.getElementById(`error-${inputElement.id}`);
-    
-    // Si el campo es 'corte2', la validación de error va al segundo span
-    const errorId = (inputElement.id === 'corte2') ? 'error-corte2' : 'error-corte1';
     const rawValue = inputElement.value.trim();
     const value = parseFloat(rawValue);
 
     // 1. No mostrar error si el campo está vacío (mientras se escribe)
     if (rawValue === "") {
-        errorElement.textContent = (errorId === 'error-corte1') ? "ERROR" : "ERROR"; // Mantiene los placeholders de la imagen
-        errorElement.style.color = 'var(--danger-color)'; // Color de error
+        errorElement.textContent = "";
         return;
     }
 
@@ -44,9 +40,8 @@ function validarYLimpiar(inputElement) {
         errorElement.textContent = ERROR_MENSAJE;
         errorElement.style.color = getCssVariable('--danger-color');
     } else {
-        // Limpia y restablece los placeholders de la imagen
-        errorElement.textContent = (errorId === 'error-corte1') ? "ERROR" : "ERROR";
-        errorElement.style.color = getCssVariable('--primary-green');
+        // Limpia el contenido si es válido
+        errorElement.textContent = "";
     }
 }
 
@@ -57,11 +52,9 @@ function validarYLimpiar(inputElement) {
  * Función principal para calcular la nota necesaria para el 3.0 y los promedios generales.
  */
 function calcularTodo() {
-    // Resetear mensajes de error (mostrando los placeholders de la imagen)
-    document.getElementById('error-corte1').textContent = 'ERROR';
-    document.getElementById('error-corte2').textContent = 'ERROR';
-    document.getElementById('error-corte1').style.color = getCssVariable('--primary-green');
-    document.getElementById('error-corte2').style.color = getCssVariable('--primary-green');
+    // Resetear mensajes de error (Ahora se dejan vacíos)
+    document.getElementById('error-corte1').textContent = '';
+    document.getElementById('error-corte2').textContent = '';
 
     // Elementos del resultado
     const notaNecesariaSpan = document.getElementById('notaNecesaria'); // El número grande
@@ -71,10 +64,10 @@ function calcularTodo() {
     const notaActualSpan = document.getElementById('notaActual');
 
     // Elementos del texto de resultado complejo (lado derecho)
-    const resultLine1 = document.querySelector('.result-text-group p:nth-child(2) span:nth-child(1)');
-    const resultLine2 = document.querySelector('.result-text-group p:nth-child(3) span:nth-child(1)');
+    const resultLine1 = document.getElementById('result-line-1'); // Necesitas:
+    const resultLine2 = document.getElementById('result-line-2'); // Línea 2
+    const resultLine3 = document.getElementById('result-line-3'); // Línea 3
     const imposibleSpan = document.getElementById('imposible-text');
-
 
     // Resetear resultados
     notaNecesariaSpan.textContent = '0.00';
@@ -82,6 +75,10 @@ function calcularTodo() {
     notaFinalMaximaSpan.textContent = '0.00';
     notaFinalMinimaSpan.textContent = '0.00';
     notaActualSpan.textContent = '0.00';
+    resultLine1.textContent = '';
+    resultLine2.textContent = '';
+    resultLine3.textContent = '';
+    imposibleSpan.textContent = '';
 
 
     // 1. Obtener los valores crudos del DOM
@@ -114,7 +111,7 @@ function calcularTodo() {
         hayError = true;
     }
     
-    // Si hay error en la validación del botón, muestra el color de error
+    // Si hay error, detenemos la ejecución de la función y pintamos el texto de error en rojo
     if (hayError) {
         document.getElementById('error-corte1').style.color = getCssVariable('--danger-color');
         document.getElementById('error-corte2').style.color = getCssVariable('--danger-color');
@@ -141,19 +138,18 @@ function calcularTodo() {
     if (notaNecesaria > NOTA_MAXIMA) {
         // IMPOSIBLE
         const notaExcesiva = notaNecesaria.toFixed(2);
-        notaNecesariaSpan.textContent = '5.00'; // Muestra 5.00 o más si se requiere
-        mensajeNecesariaP.textContent = `¡Imposible! Necesitas una nota de ${notaExcesiva}.`;
+        notaNecesariaSpan.textContent = '5.00'; 
+        mensajeNecesariaP.textContent = `¡Imposible! Necesitas una nota superior a 5.0.`;
         
-        // Estilos para la sección de resultado (el número grande)
+        // Estilos y mensajes
         notaNecesariaSpan.style.color = getCssVariable('--danger-color');
-        
-        // Estilos para el mensaje principal
         mensajeNecesariaP.style.color = getCssVariable('--danger-color');
         mensajeNecesariaP.style.textShadow = getCssVariable('--shadow-neon-red');
         
         // Texto de resultado complejo
         resultLine1.textContent = `Se requiere una nota de ${notaExcesiva}`;
-        resultLine2.textContent = `Nota requerida > 5.00`;
+        resultLine2.textContent = ``; // Se deja vacío para alineación visual
+        resultLine3.textContent = `Nota requerida > 5.00`;
         imposibleSpan.textContent = 'Imposible';
         imposibleSpan.style.color = getCssVariable('--danger-color');
         imposibleSpan.style.textShadow = getCssVariable('--shadow-neon-red');
@@ -163,16 +159,15 @@ function calcularTodo() {
         notaNecesariaSpan.textContent = `0.00`;
         mensajeNecesariaP.textContent = `¡Ya Aprobaste! Tu nota es suficiente.`;
         
-        // Estilos para la sección de resultado
+        // Estilos y mensajes
         notaNecesariaSpan.style.color = getCssVariable('--primary-green');
-        
-        // Estilos para el mensaje principal
         mensajeNecesariaP.style.color = getCssVariable('--primary-green');
         mensajeNecesariaP.style.textShadow = getCssVariable('--shadow-neon-green');
         
         // Texto de resultado complejo
         resultLine1.textContent = `¡Aprobación asegurada!`;
-        resultLine2.textContent = `Nota requerida: 0.00`;
+        resultLine2.textContent = ``;
+        resultLine3.textContent = `Nota requerida: 0.00`;
         imposibleSpan.textContent = '¡Éxito!';
         imposibleSpan.style.color = getCssVariable('--secondary-yellow');
         imposibleSpan.style.textShadow = getCssVariable('--shadow-neon-yellow');
@@ -181,18 +176,17 @@ function calcularTodo() {
         // NOTA REQUERIDA NORMAL
         const notaRequeridaFixed = notaNecesaria.toFixed(2);
         notaNecesariaSpan.textContent = notaRequeridaFixed;
-        mensajeNecesariaP.textContent = `¡Lo lograste en el último corte! (${notaRequeridaFixed})`;
+        mensajeNecesariaP.textContent = `¡Lo lograste en the último corte! (${notaRequeridaFixed})`;
         
-        // Estilos para la sección de resultado
+        // Estilos y mensajes
         notaNecesariaSpan.style.color = getCssVariable('--primary-green');
-        
-        // Estilos para el mensaje principal
         mensajeNecesariaP.style.color = getCssVariable('--primary-green');
         mensajeNecesariaP.style.textShadow = getCssVariable('--shadow-neon-green');
 
         // Texto de resultado complejo
         resultLine1.textContent = `Necesitas el ${notaRequeridaFixed} en el Corte 3.`;
-        resultLine2.textContent = `Nota requerida: ${notaRequeridaFixed}`;
+        resultLine2.textContent = ``;
+        resultLine3.textContent = `Máximo posible: ${notaFinalMaxima.toFixed(2)}`;
         imposibleSpan.textContent = 'A calcular'; // Placeholder neutral
         imposibleSpan.style.color = getCssVariable('--secondary-yellow');
         imposibleSpan.style.textShadow = getCssVariable('--shadow-neon-yellow');
@@ -204,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Es importante que el valor inicial sea '0.0' para evitar que se considere vacío al cargar
     document.getElementById('corte1').value = '0.0'; 
     document.getElementById('corte2').value = '0.0';
-    // Inicializa el texto de error con los placeholders de la imagen
-    document.getElementById('error-corte1').textContent = 'ERROR'; 
-    document.getElementById('error-corte2').textContent = 'ERROR';
+    // Inicializa el texto de error vacío
+    document.getElementById('error-corte1').textContent = ''; 
+    document.getElementById('error-corte2').textContent = '';
 });

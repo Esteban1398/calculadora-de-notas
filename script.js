@@ -8,12 +8,11 @@ const NOTA_APROBACION = 3.0;
 const NOTA_MAXIMA = 5.0;
 const NOTA_MINIMA = 0.0;
 const ERROR_MENSAJE = "Formato inválido (utilice números positivos entre 0.0 y 5.0)";
-const ERROR_VACIO = "La casilla no puede estar vacía al calcular."; // Nuevo mensaje de error para campo vacío
+const ERROR_VACIO = "La casilla no puede estar vacía al calcular."; // Mensaje de error para campo vacío
 
 /**
  * Función que se ejecuta al escribir en los inputs.
  * Valida el valor y limpia el mensaje de error si es válido.
- * NOTA: Esta función permite borrar el campo sin que el error se muestre inmediatamente.
  * @param {HTMLInputElement} inputElement El elemento input que se está modificando.
  */
 function validarYLimpiar(inputElement) {
@@ -50,11 +49,18 @@ function calcularTodo() {
     const mensajeNecesaria = document.getElementById('mensajeNecesaria');
     const notaFinalMaximaSpan = document.getElementById('notaFinalMaxima');
     const notaFinalMinimaSpan = document.getElementById('notaFinalMinima');
+    const notaActualSpan = document.getElementById('notaActual'); // Nuevo span añadido en el HTML anterior
 
     // Resetear resultados
     notaNecesariaSpan.textContent = '0.00';
     mensajeNecesaria.textContent = '';
     notaNecesariaSpan.style.color = 'var(--primary-color)';
+    notaFinalMaximaSpan.textContent = '0.00';
+    notaFinalMinimaSpan.textContent = '0.00';
+    if (notaActualSpan) {
+        notaActualSpan.textContent = '0.00';
+    }
+
 
     // 1. Obtener los valores crudos del DOM
     const rawN1 = document.getElementById('corte1').value.trim();
@@ -67,34 +73,27 @@ function calcularTodo() {
     let hayError = false;
 
     // 3. Validación estricta antes de calcular (para el botón)
-
-    // VALIDACIÓN DE CAMPO VACÍO AL CALCULAR
     if (rawN1 === "") {
         document.getElementById('error-corte1').textContent = ERROR_VACIO;
         hayError = true;
     } else if (isNaN(n1) || n1 < NOTA_MINIMA || n1 > NOTA_MAXIMA) {
-        // Validación de formato/rango
         document.getElementById('error-corte1').textContent = ERROR_MENSAJE;
         hayError = true;
     }
     
-    // VALIDACIÓN DE CAMPO VACÍO AL CALCULAR
     if (rawN2 === "") {
         document.getElementById('error-corte2').textContent = ERROR_VACIO;
         hayError = true;
     } else if (isNaN(n2) || n2 < NOTA_MINIMA || n2 > NOTA_MAXIMA) {
-        // Validación de formato/rango
         document.getElementById('error-corte2').textContent = ERROR_MENSAJE;
         hayError = true;
     }
 
     if (hayError) {
-        // Si hay error, detenemos la ejecución de la función
         return;
     }
     
     // 4. Los valores numéricos son válidos, procedemos con el cálculo
-    // Nota: Como ya validamos que no estén vacíos y sean números, aquí usamos n1 y n2 directamente.
 
     // 5. CÁLCULO PRINCIPAL: Nota Necesaria para 3.0
     const pesoAcumulado = (n1 * PESO_CORTE_1) + (n2 * PESO_CORTE_2);
@@ -104,17 +103,18 @@ function calcularTodo() {
 
     // 6. Mostrar y manejar límites de la Nota Necesaria
     if (notaNecesaria > NOTA_MAXIMA) {
+        // IMPOSIBLE
         notaNecesariaSpan.textContent = notaNecesaria.toFixed(2);
         mensajeNecesaria.textContent = `¡Imposible! Necesitas una nota superior a 5.0.`;
         notaNecesariaSpan.style.color = 'var(--danger-color)';
     } else if (notaNecesaria < NOTA_MINIMA) {
+        // YA APROBADO (Nota Requerida <= 0.0)
         notaNecesariaSpan.textContent = `0.00`;
-        // MENSAJE DE APROBADO: "¡Ya Aprobaste! Tu nota es suficiente"
         mensajeNecesaria.textContent = `¡Ya Aprobaste! Tu nota es suficiente`;
         notaNecesariaSpan.style.color = 'var(--secondary-color)';
     }
     else {
-        // MENSAJE DE DEBE OBTENER: "Debes obtener X.XX en el Corte 3"
+        // NOTA REQUERIDA NORMAL (Nota Requerida > 0.0 y <= 5.0)
         mensajeNecesaria.textContent = `Debes obtener ${notaNecesaria.toFixed(2)} en el Corte 3`;
         notaNecesariaSpan.textContent = notaNecesaria.toFixed(2);
         notaNecesariaSpan.style.color = 'var(--primary-color)';
@@ -126,6 +126,11 @@ function calcularTodo() {
 
     let notaFinalMinima = pesoAcumulado + (NOTA_MINIMA * PESO_CORTE_3);
     notaFinalMinimaSpan.textContent = notaFinalMinima.toFixed(2);
+    
+    if (notaActualSpan) {
+        // Si el span existe, actualiza la nota actual
+        notaActualSpan.textContent = pesoAcumulado.toFixed(2);
+    }
 }
 
 // Inicializar los campos con 0.0 al cargar la página

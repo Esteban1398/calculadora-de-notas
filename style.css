@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
 
 :root {
-    /* Paleta Temática Wicked (Ajustada a la imagen) */
-    --primary-green: #00e676; /* Verde neón más específico de la imagen */
-    --secondary-yellow: #ffc107; /* Amarillo/Oro para acentos */
+    /* Paleta Temática Wicked (Ajustada a la imagen y neón) */
+    --primary-green: #00e676; /* Verde neón (Elphaba) */
+    --secondary-yellow: #ffc107; /* Amarillo/Oro (Acentos) */
     --error-red: #ff3333; /* Rojo para errores */
     --text-light: #e0e0e0; /* Texto claro general */
     --text-dark-input: #000000; /* Texto oscuro para inputs */
@@ -20,19 +20,19 @@ body {
     font-family: 'Inter', sans-serif;
     /* Fondo oscuro con destellos púrpuras y azules */
     background: linear-gradient(135deg, #2a003f 0%, #0a002a 50%, #000a1a 100%);
-    background-size: 400% 400%; /* Para el efecto de movimiento del fondo */
+    background-size: 400% 400%;
     animation: backgroundShift 20s ease infinite;
 
     color: var(--text-light);
     display: flex;
     justify-content: center;
-    align-items: center; /* Centrado vertical para la tarjeta */
+    /* No se usa align-items: center para permitir el scroll si la página crece */
     min-height: 100vh;
     margin: 0;
-    padding: 20px;
+    padding: 50px 20px 20px 20px; /* Padding superior para contenido flotante */
     box-sizing: border-box;
     position: relative;
-    overflow: hidden; /* Mantenemos hidden para el efecto visual, si el contenido crece, se recortará */
+    overflow-x: hidden; /* Permite scroll vertical pero no horizontal */
 }
 
 @keyframes backgroundShift {
@@ -41,30 +41,30 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Orbes de fondo (ajustados a la imagen) */
+/* Orbes de fondo Fijos para que no se muevan con el scroll */
 body::before, body::after {
     content: '';
-    position: fixed;
+    position: fixed; /* CLAVE para permitir el scroll */
     border-radius: 50%;
-    filter: blur(80px); /* Un blur intenso para un efecto de brillo */
-    opacity: 0.5; /* Más sutil */
+    filter: blur(80px); 
+    opacity: 0.5; 
     z-index: -1;
     animation: floatBlob 20s infinite ease-in-out alternate;
 }
 
 body::before {
-    width: 300px; /* Más grande */
+    width: 300px; 
     height: 300px;
-    background: radial-gradient(circle, #00e676 0%, transparent 70%); /* Verde */
-    top: 30%; /* Posición específica */
+    background: radial-gradient(circle, #00e676 0%, transparent 70%); 
+    top: 30%; 
     left: 10%;
     animation-delay: 0s;
 }
 
 body::after {
-    width: 300px; /* Más grande */
+    width: 300px; 
     height: 300px;
-    background: radial-gradient(circle, #ffc107 0%, transparent 70%); /* Amarillo */
+    background: radial-gradient(circle, #ffc107 0%, transparent 70%); 
     bottom: 20%;
     right: 10%;
     animation-delay: 10s;
@@ -72,25 +72,26 @@ body::after {
 
 @keyframes floatBlob {
     0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(40px, 60px) scale(1.05); } /* Movimiento más amplio */
+    50% { transform: translate(40px, 60px) scale(1.05); } 
     100% { transform: translate(0, 0) scale(1); }
 }
 
+/* Contenedor principal de la calculadora */
 .card-container {
-    background: rgba(0, 0, 0, 0.7); /* Fondo más oscuro y opaco */
-    backdrop-filter: blur(8px) brightness(1.2); /* Menos blur, más brillo */
+    background: var(--card-bg-dark); 
+    backdrop-filter: blur(8px) brightness(1.2); 
     -webkit-backdrop-filter: blur(8px) brightness(1.2);
-    border-radius: 15px; /* Ligeramente menos redondeado */
-    box-shadow: 0 0 25px rgba(0, 230, 118, 0.4); /* Sombra de la tarjeta verde neón */
-    border: 2px solid var(--card-border-green); /* Borde verde neón */
-    padding: 30px; /* Menos padding */
+    border-radius: 15px; 
+    box-shadow: 0 0 25px rgba(0, 230, 118, 0.4); 
+    border: 2px solid var(--card-border-green); 
+    padding: 30px; 
     width: 100%;
-    max-width: 500px; /* Ajuste el ancho según la imagen */
+    max-width: 500px; 
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card-container:hover {
-    box-shadow: 0 0 40px rgba(0, 230, 118, 0.7); /* Sombra más intensa en hover */
+    box-shadow: 0 0 40px rgba(0, 230, 118, 0.7); 
     transform: translateY(-2px) scale(1.01);
 }
 
@@ -101,7 +102,7 @@ header {
 }
 
 h1 {
-    font-size: 2.5em; /* Ajuste de tamaño */
+    font-size: 2.5em; 
     font-weight: 800;
     color: var(--primary-green);
     margin: 0;
@@ -111,22 +112,22 @@ h1 {
 }
 
 p { /* Para el texto 33% - 33% - 34% */
-    color: var(--text-light); /* En la imagen es blanco/claro */
+    color: var(--text-light); 
     font-weight: 500;
     font-size: 1.0em;
     margin-top: 5px;
-    text-shadow: none; /* Sin sombra para este texto */
+    text-shadow: none; 
 }
 
 h3, h4 {
-    color: var(--text-light); /* En la imagen son blancos/claros */
-    font-weight: 600;
-    font-size: 1.1em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Borde más sutil */
+    color: var(--secondary-yellow); 
+    font-weight: 700;
+    font-size: 1.2em;
+    border-bottom: 2px solid var(--card-border-green); /* Borde verde para separar secciones auxiliares */
     padding-bottom: 8px;
     margin-top: 25px;
     margin-bottom: 15px;
-    text-shadow: none;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
 }
 
 /* --- Entradas de Formulario --- */
@@ -139,53 +140,49 @@ label {
     margin-bottom: 8px;
     font-weight: 600;
     font-size: 0.95em;
-    color: var(--primary-green); /* Labels en verde neón */
+    color: var(--primary-green); 
     text-shadow: 0 0 5px rgba(0, 230, 118, 0.4);
 }
 
 input[type="text"] {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid var(--primary-green); /* Borde verde neón */
+    border: 2px solid var(--primary-green); 
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 1.05em;
-    color: var(--text-dark-input); /* Texto de input oscuro */
-    background-color: var(--input-bg-light); /* Fondo blanco */
+    color: var(--text-dark-input); 
+    background-color: var(--input-bg-light); 
     transition: all 0.3s;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra interna para profundidad */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); 
 }
 
 input[type="text"]:focus {
     border-color: var(--primary-green);
     outline: none;
-    box-shadow: 0 0 10px var(--primary-green); /* Sombra de foco más intensa */
+    box-shadow: 0 0 10px var(--primary-green); 
     background-color: #ffffff;
 }
 
-/* Contenedor de mensajes de error (AJUSTE CLAVE para la disposición) */
+/* Contenedor de mensajes de error */
 .error-messages-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    height: 20px; /* Altura fija para evitar saltos de layout */
+    margin-top: -15px;
+    margin-bottom: 20px; 
+}
+
+.error-message {
     font-size: 0.85em;
     font-weight: 600;
     color: var(--error-red);
     text-shadow: var(--shadow-neon-red);
-}
-
-.error-message {
-    flex: 1; /* Ocupa espacio disponible */
-    text-align: left;
-    margin-right: 10px; /* Espacio entre ellos */
-}
-.error-message:last-child {
-    margin-right: 0;
+    display: block; /* Asegura que el mensaje de error ocupe su propio espacio */
     text-align: right;
 }
-/* Asegúrate de que tus elementos de error tengan las clases correctas */
-/* Por ejemplo: <div class="error-messages-container"><span class="error-message">ERROR:</span><span class="error-message">OECNOW</span></div> */
 
+#error-corte1 {
+    text-align: left;
+}
 
 /* --- Botones --- */
 .btn {
@@ -196,46 +193,60 @@ input[type="text"]:focus {
     cursor: pointer;
     font-size: 1.1em;
     font-weight: 700;
-    margin-top: 25px; /* Ajuste de margen */
+    margin-top: 25px; 
     transition: all 0.3s ease-in-out;
     letter-spacing: 0.5px;
-    background: var(--primary-green); /* Botón principal verde neón */
-    color: var(--text-dark-input); /* Texto oscuro en el botón */
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.5); /* Sombra neón verde */
 }
 
-.btn:hover {
-    background-color: #00b35e; /* Un poco más oscuro en hover */
+.primary-btn {
+    background: var(--primary-green); 
+    color: var(--text-dark-input); 
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.5); 
+}
+
+.primary-btn:hover {
+    background-color: #00b35e; 
     transform: translateY(-2px);
     box-shadow: 0 0 25px rgba(0, 230, 118, 0.8);
 }
 
 /* --- Resultado Final --- */
 .result-box {
-    text-align: left; /* Alineado a la izquierda según la imagen */
+    text-align: left; 
     margin-top: 35px;
-    background: rgba(0, 0, 0, 0.3); /* Fondo más transparente */
+    background: rgba(0, 0, 0, 0.3); 
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    padding: 20px; /* Menos padding */
+    padding: 20px; 
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde más sutil */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Estilo para la palabra "Necesitas:" o "Requiere:" */
+#required-label {
+    font-size: 1.5em; 
+    font-weight: 600;
+    color: var(--text-light); 
+    margin-right: 10px; 
+    vertical-align: middle; 
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    display: inline-block; 
+}
+
 .final-score {
-    font-size: 4em; /* Ajuste de tamaño */
+    font-size: 4em; 
     font-weight: 900;
     line-height: 1;
     margin-bottom: 5px;
     color: var(--primary-green);
     text-shadow: var(--shadow-neon-green);
-    display: inline-block; /* Para que quede junto al texto "Result:" */
+    display: inline-block; 
     vertical-align: middle;
-    margin-right: 10px;
+    margin-right: 20px; /* Espacio después del número */
 }
 
-.result-text-group { /* Contenedor para "Result:" y el texto debajo del número */
+.result-text-group { 
     display: inline-block;
     vertical-align: middle;
     text-align: left;
@@ -244,19 +255,19 @@ input[type="text"]:focus {
 }
 
 .result-text-group p {
-    margin: 0;
+    margin: 2px 0;
     padding: 0;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
-.result-text-group span { /* Para los porcentajes y "Imposible" */
+.result-text-group span { 
     font-weight: 600;
-    color: var(--secondary-yellow); /* Porcentaje en amarillo */
+    color: var(--secondary-yellow); 
     text-shadow: var(--shadow-neon-yellow);
 }
 
 /* Mensaje final de exito/imposible (al pie del result-box) */
-.final-message-container { /* Un nuevo contenedor para este mensaje */
+.final-message-container { 
     text-align: center;
     margin-top: 20px;
     font-weight: 700;
@@ -269,16 +280,16 @@ input[type="text"]:focus {
     border: 1px solid var(--primary-green);
 }
 
-
-/* Estilos condicionales para el mensaje */
-#mensajeNecesaria[style*="#ffd700"] { /* Éxito (Oro Intenso) */
-    color: var(--secondary-yellow) !important;
-    text-shadow: var(--shadow-neon-yellow);
+/* Estilos condicionales para el mensaje (usados por JS para aplicar color/sombra) */
+#mensajeNecesaria[style*="--primary-green"] { 
+    color: var(--primary-green) !important;
+    text-shadow: var(--shadow-neon-green) !important;
 }
-#mensajeNecesaria[style*="#ff3333"] { /* Imposible (Rojo Neón) */
+#mensajeNecesaria[style*="--danger-color"] { 
     color: var(--error-red) !important;
-    text-shadow: var(--shadow-neon-red);
+    text-shadow: var(--shadow-neon-red) !important;
 }
+
 
 /* --- Cálculos Auxiliares --- */
 .goal-calc p {
@@ -289,9 +300,9 @@ input[type="text"]:focus {
 }
 
 #notaFinalMaxima, #notaFinalMinima {
-    color: var(--primary-green); /* En verde neón */
-    font-weight: 700;
-    text-shadow: 0 0 5px rgba(0, 230, 118, 0.4);
+    color: var(--secondary-yellow); /* Valores en dorado */
+    font-weight: 800;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.4);
 }
 
 hr {

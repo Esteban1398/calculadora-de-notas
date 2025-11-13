@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Nota Final 😎</title>
     <link rel="stylesheet" href="style.css">
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
 <body>
 
     <div class="card-container">
@@ -15,37 +16,48 @@
         </header>
         
         <section class="corte-inputs">
-            <h3>Notas Registradas (Solo Cortes 1 y 2)</h3>
             <div class="input-group">
-                <label for="corte1">Nota Corte 1 (33%):</label>
+                <label for="corte1">Nota Corte 1</label>
                 <input type="text" id="corte1" value="0.0" oninput="validarYLimpiar(this)">
-                <span class="error-message" id="error-corte1"></span>
-            </div>
+                </div>
 
             <div class="input-group">
-                <label for="corte2">Nota Corte 2 (33%):</label>
+                <label for="corte2">Nota Corte 2</label>
                 <input type="text" id="corte2" value="0.0" oninput="validarYLimpiar(this)">
-                <span class="error-message" id="error-corte2"></span>
+                </div>
+            
+            <div class="error-messages-container">
+                <span class="error-message" id="error-corte1">ERROR</span>
+                <span class="error-message" id="error-corte2">ERROR</span>
             </div>
             
-            <button class="btn primary-btn" onclick="calcularTodo()">Calcular Nota Necesaria para 3.0</button>
+            <button class="btn primary-btn" onclick="calcularTodo()">Calcular Nota Necesaria</button>
         </section>
 
-        <section class="result-box goal-calc">
-            <h4>Nota Necesaria en Corte 3 (34%)</h4>
-            <div class="final-score">
-                <span id="notaNecesaria">0.00</span>
+        <section class="result-box">
+            
+            <span class="final-score" id="notaNecesaria">0.00</span>
+            
+            <div class="result-text-group">
+                <p>Result:</p>
+                <p><span>0.00% esto lograste en tu ultimo corte</span> <span>pasaste</span></p>
+                <p><span>0.00 último corte!</span> <span id="imposible-text" style="color:var(--error-red);">Imposible</span></p>
             </div>
-            <p id="mensajeNecesaria" class="message"></p>
+            
+            <div class="final-message-container">
+                 <p id="mensajeNecesaria">Ingresa tus notas para calcular.</p>
+            </div>
         </section>
 
         <hr>
 
         <section class="goal-calc">
             <h3>Promedio General (Cálculos Auxiliares)</h3>
-            <p>Tu nota final máxima posible sería: <strong><span id="notaFinalMaxima">0.00</span></strong></p>
-            <p>Nota Final con 0.0 en Corte 3 sería: <strong><span id="notaFinalMinima">0.00</span></strong></p>
+            <p>Tu nota final máxima posible sería: <strong><span id="notaFinalMaxima">5.00</span></strong></p>
+            <p>Tu nota final mínima posible sería: <strong><span id="notaFinalMinima">0.00</span></strong></p>
+            <p>Tu nota actual (sin el Corte 3) es: <strong><span id="notaActual">0.00</span></strong></p>
         </section>
+        
     </div>
 
     <script src="script.js"></script>

@@ -1,23 +1,22 @@
-/* Importar fuente Roboto Mono para un toque más técnico/moderno */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap');
+/* Importar fuente Inter para un look moderno y limpio */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :root {
-    /* Paleta de Colores de Alto Contraste (Casi Dark Mode) */
-    --primary-color: #00bcd4; /* Cian/Turquesa vibrante para acento */
-    --secondary-color: #ff9800; /* Naranja para advertencias */
-    --danger-color: #f44336; /* Rojo para reprobado */
-    --success-color: #8bc34a; /* Verde para éxito */
-    --bg-main: #1e1e1e; /* Fondo muy oscuro (casi negro) */
-    --card-bg: #2d2d30; /* Fondo de tarjeta un poco más claro que el fondo */
-    --text-color: #f0f0f0; /* Texto claro */
-    --border-color: #444444; /* Bordes discretos */
-    --shadow-dark: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra intensa pero suave */
+    /* Paleta Glassmorphism y Vibrante */
+    --primary-color: #00e0ff; /* Azul/Cian Brillante para acentos */
+    --secondary-color: #00ff88; /* Verde Neón para éxito */
+    --danger-color: #ff5577; /* Rojo Brillante para error */
+    --bg-card: rgba(255, 255, 255, 0.15); /* Fondo de tarjeta transparente */
+    --text-color: #ffffff; /* Texto claro */
+    --text-dark: #1f1f1f; /* Texto oscuro para contraste */
+    --border-glass: rgba(255, 255, 255, 0.3); /* Borde transparente */
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Sombra intensa */
 }
 
 body {
-    font-family: 'Roboto Mono', monospace; /* Fuente Monospace para un look técnico */
-    /* Fondo oscuro sólido */
-    background-color: var(--bg-main); 
+    font-family: 'Inter', sans-serif;
+    /* Fondo vibrante para que el Glassmorphism se destaque */
+    background: linear-gradient(135deg, #4b3d8f 0%, #0093e9 50%, #80d0c7 100%);
     color: var(--text-color);
     display: flex;
     justify-content: center;
@@ -25,34 +24,38 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .card-container {
-    background-color: var(--card-bg);
-    padding: 35px;
-    border-radius: 8px;
-    box-shadow: var(--shadow-dark); 
-    border-left: 5px solid var(--primary-color); /* Toque de color en el borde lateral */
+    background: var(--bg-card);
+    backdrop-filter: blur(10px); /* Efecto Glassmorphism: desenfoque */
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: var(--shadow-glass);
+    border: 1px solid var(--border-glass);
+    padding: 30px;
     width: 100%;
-    max-width: 450px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    max-width: 420px;
+    transition: all 0.3s;
 }
 
 .card-container:hover {
-    transform: scale(1.01);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+/* --- Encabezados y Títulos --- */
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
     font-size: 2em;
     font-weight: 700;
     color: var(--primary-color);
-    letter-spacing: 2px; /* Espaciado para el título */
     margin: 0;
 }
 
@@ -60,11 +63,13 @@ h3, h4 {
     color: var(--text-color);
     font-weight: 600;
     font-size: 1.1em;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-glass);
     padding-bottom: 8px;
     margin-top: 25px;
+    margin-bottom: 15px;
 }
 
+/* --- Entradas de Formulario --- */
 .input-group {
     margin-bottom: 20px;
 }
@@ -74,34 +79,37 @@ label {
     margin-bottom: 8px;
     font-weight: 400;
     font-size: 0.9em;
-    color: var(--primary-color); /* El label es del color de acento */
+    color: var(--primary-color);
 }
 
-input[type="number"] {
+input[type="text"] {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border: 1px solid var(--border-glass);
+    border-radius: 8px;
     box-sizing: border-box;
     font-size: 1em;
-    color: var(--text-color);
-    background-color: #383838; /* Fondo del input ligeramente más oscuro */
-    transition: border-color 0.3s, box-shadow 0.3s;
+    color: var(--text-dark);
+    /* Fondo de input ligeramente transparente */
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s;
 }
 
-input[type="number"]:focus {
+input[type="text"]:focus {
     border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.5); 
+    box-shadow: 0 0 10px var(--primary-color);
+    background-color: #ffffff; /* Menos transparencia al enfocar */
 }
 
-/* Estilo para los mensajes de error */
+/* Mensajes de error */
 .error-message {
     color: var(--danger-color);
     font-size: 0.8em;
     font-weight: 600;
     margin-top: 5px;
     display: block;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 /* --- Botones --- */
@@ -109,62 +117,76 @@ input[type="number"]:focus {
     width: 100%;
     padding: 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 700;
-    margin-top: 25px;
-    transition: background-color 0.3s, transform 0.1s;
-    text-transform: uppercase; /* Uso de mayúsculas para un look más formal/técnico */
-    letter-spacing: 1px;
+    margin-top: 20px;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 0.5px;
+    /* Estilo para que el botón parezca un "vidrio" elevado */
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--text-color);
 }
 
 .primary-btn {
-    background-color: var(--primary-color);
-    color: var(--card-bg); /* Texto oscuro/casi negro para alto contraste */
+    background: var(--primary-color); /* Color sólido para el botón principal */
+    color: var(--text-dark);
+    box-shadow: 0 4px 15px rgba(0, 224, 255, 0.4);
+    border: none;
 }
 
 .primary-btn:hover {
-    background-color: #00acc1; /* Un poco más oscuro */
+    background-color: #00b3cc;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 224, 255, 0.6);
 }
 
 /* --- Resultado Final --- */
 .result-box {
     text-align: center;
-    margin-top: 40px;
-    background-color: #383838; /* Fondo oscuro para el resultado */
+    margin-top: 35px;
+    /* Efecto Glassmorphism de caja interna */
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     padding: 25px;
-    border-radius: 4px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 1px solid var(--border-glass);
 }
 
 .final-score {
-    font-size: 4em;
+    font-size: 3.5em;
     font-weight: 700;
-    line-height: 1;
-    margin-bottom: 10px;
+    line-height: 1.1;
+    margin-bottom: 5px;
     color: var(--primary-color);
+    text-shadow: 0 0 8px rgba(0, 224, 255, 0.5);
 }
 
 #notaNecesaria {
-    color: var(--secondary-color); /* Usar naranja para resaltar la nota necesaria */
+    color: var(--primary-color);
 }
 
 .message {
     font-weight: 600;
     padding: 8px;
-    border-radius: 2px;
-    font-size: 0.9em;
+    border-radius: 4px;
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos condicionales para el mensaje */
-#mensajeNecesaria[style*="#8bc34a"] { /* Éxito (Verde) */
-    color: var(--success-color);
+/* Importante: estos selectores se han actualizado con los nuevos colores de las variables */
+#mensajeNecesaria[style*="#00ff88"] { /* Éxito (Verde Neón: --secondary-color) */
+    color: var(--secondary-color) !important;
+    text-shadow: 0 0 5px var(--secondary-color);
 }
-#mensajeNecesaria[style*="#f44336"] { /* Imposible (Rojo) */
-    color: var(--danger-color);
+#mensajeNecesaria[style*="#ff5577"] { /* Imposible (Rojo Brillante: --danger-color) */
+    color: var(--danger-color) !important;
+    text-shadow: 0 0 5px var(--danger-color);
 }
 
 /* --- Cálculos Auxiliares --- */
@@ -172,7 +194,7 @@ input[type="number"]:focus {
     text-align: center;
     margin-top: 15px;
     font-size: 1em;
-    color: #aaaaaa; /* Texto gris claro */
+    color: rgba(255, 255, 255, 0.8);
 }
 
 #notaFinalMaxima, #notaFinalMinima {
@@ -183,5 +205,5 @@ input[type="number"]:focus {
 hr {
     margin: 30px 0;
     border: 0;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-glass);
 }

@@ -2,21 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :root {
-    /* Paleta Glassmorphism y Vibrante */
-    --primary-color: #00e0ff; /* Azul/Cian Brillante para acentos */
-    --secondary-color: #00ff88; /* Verde Neón para éxito */
-    --danger-color: #ff5577; /* Rojo Brillante para error */
-    --bg-card: rgba(255, 255, 255, 0.15); /* Fondo de tarjeta transparente */
-    --text-color: #ffffff; /* Texto claro */
-    --text-dark: #1f1f1f; /* Texto oscuro para contraste */
+    /* Paleta Glassmorphism y Verde */
+    --primary-color: #32ff7e; /* Verde Neón para acentos (Nota, Títulos) */
+    --secondary-color: #52ff32; /* Verde más brillante para éxito */
+    --danger-color: #ff5555; /* Rojo Brillante para error (Alto contraste) */
+    --bg-card: rgba(0, 0, 0, 0.2); /* Fondo de tarjeta más oscuro y transparente */
+    --text-color: #d9ffea; /* Texto principal (Verde muy sutil, casi blanco) */
+    --text-dark: #0a1c0d; /* Texto oscuro (para input fields) */
     --border-glass: rgba(255, 255, 255, 0.3); /* Borde transparente */
-    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Sombra intensa */
+    --shadow-glass: 0 8px 32px 0 rgba(10, 20, 10, 0.5); /* Sombra de vidrio sutil */
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    /* Fondo vibrante para que el Glassmorphism se destaque */
-    background: linear-gradient(135deg, #4b3d8f 0%, #0093e9 50%, #80d0c7 100%);
+    /* Nuevo fondo profundo de tonos verdes y azules oscuros para el contraste */
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
     color: var(--text-color);
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@ body {
 }
 
 .card-container:hover {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(50, 255, 126, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
@@ -132,15 +132,15 @@ input[type="text"]:focus {
 
 .primary-btn {
     background: var(--primary-color); /* Color sólido para el botón principal */
-    color: var(--text-dark);
-    box-shadow: 0 4px 15px rgba(0, 224, 255, 0.4);
+    color: var(--text-dark); /* Texto muy oscuro sobre el botón brillante */
+    box-shadow: 0 4px 15px rgba(50, 255, 126, 0.4);
     border: none;
 }
 
 .primary-btn:hover {
-    background-color: #00b3cc;
+    background-color: #27cc65;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 224, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(50, 255, 126, 0.6);
 }
 
 /* --- Resultado Final --- */
@@ -162,7 +162,7 @@ input[type="text"]:focus {
     line-height: 1.1;
     margin-bottom: 5px;
     color: var(--primary-color);
-    text-shadow: 0 0 8px rgba(0, 224, 255, 0.5);
+    text-shadow: 0 0 8px rgba(50, 255, 126, 0.5);
 }
 
 #notaNecesaria {
@@ -179,12 +179,11 @@ input[type="text"]:focus {
 }
 
 /* Estilos condicionales para el mensaje */
-/* Importante: estos selectores se han actualizado con los nuevos colores de las variables */
-#mensajeNecesaria[style*="#00ff88"] { /* Éxito (Verde Neón: --secondary-color) */
+#mensajeNecesaria[style*="#52ff32"] { /* Éxito (Verde Brillante) */
     color: var(--secondary-color) !important;
     text-shadow: 0 0 5px var(--secondary-color);
 }
-#mensajeNecesaria[style*="#ff5577"] { /* Imposible (Rojo Brillante: --danger-color) */
+#mensajeNecesaria[style*="#ff5555"] { /* Imposible (Rojo Brillante) */
     color: var(--danger-color) !important;
     text-shadow: 0 0 5px var(--danger-color);
 }

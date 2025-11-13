@@ -57,6 +57,8 @@ h1 {
     font-weight: 700;
     color: var(--primary-color);
     margin: 0;
+    /* Efecto Neón/Radiante */
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px rgba(50, 255, 126, 0.5);
 }
 
 h3, h4 {

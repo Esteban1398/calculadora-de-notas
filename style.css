@@ -2,270 +2,300 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
 
 :root {
-    /* Paleta Temática Wicked (Intensificada) */
-    --primary-color: #00ff80; /* Verde Esmeralda súper brillante (Elphaba) */
-    --secondary-color: #ffd700; /* Oro intenso (Glinda/Logo) */
-    --danger-color: #ff3366; /* Rosa/Rojo neón para error */
-    --bg-card: rgba(0, 0, 0, 0.6); /* Fondo de tarjeta más oscuro y opaco */
-    --text-color: #f0f0f0; /* Texto principal claro */
-    --text-dark: #1a0a20; /* Texto oscuro para input fields (casi negro morado) */
-    --border-glass: rgba(255, 255, 255, 0.4); /* Borde transparente más grueso */
-    --shadow-glass: 0 10px 40px 0 rgba(0, 0, 0, 0.8); /* Sombra MUY intensa */
+    /* Paleta Temática Wicked (Ajustada a la imagen) */
+    --primary-green: #00e676; /* Verde neón más específico de la imagen */
+    --secondary-yellow: #ffc107; /* Amarillo/Oro para acentos */
+    --error-red: #ff3333; /* Rojo para errores */
+    --text-light: #e0e0e0; /* Texto claro general */
+    --text-dark-input: #000000; /* Texto oscuro para inputs */
+    --card-bg-dark: rgba(0, 0, 0, 0.7); /* Fondo de tarjeta más oscuro */
+    --card-border-green: #00e676; /* Borde de tarjeta verde neón */
+    --input-bg-light: #ffffff; /* Fondo blanco para inputs */
+    --shadow-neon-green: 0 0 15px var(--primary-green), 0 0 30px rgba(0, 230, 118, 0.6);
+    --shadow-neon-yellow: 0 0 10px var(--secondary-yellow), 0 0 20px rgba(255, 193, 7, 0.4);
+    --shadow-neon-red: 0 0 10px var(--error-red), 0 0 20px rgba(255, 51, 51, 0.4);
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    /* Fondo Oscuro, Místico y Dinámico (Wicked Sky) */
-    background: linear-gradient(160deg, #2d003b 0%, #000a20 50%, #0c2a4f 100%);
-    color: var(--text-color);
+    /* Fondo oscuro con destellos púrpuras y azules */
+    background: linear-gradient(135deg, #2a003f 0%, #0a002a 50%, #000a1a 100%);
+    background-size: 400% 400%; /* Para el efecto de movimiento del fondo */
+    animation: backgroundShift 20s ease infinite;
+
+    color: var(--text-light);
     display: flex;
     justify-content: center;
-    /* CLAVE: Eliminación de 'overflow: hidden;' y ajuste de alineación para permitir el scroll */
-    /* align-items: center; <-- Removido para permitir el scroll y que el contenido inicie arriba. */
+    align-items: center; /* Centrado vertical para la tarjeta */
     min-height: 100vh;
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
-    /* overflow: hidden; <-- ELIMINADO para permitir el scroll. */
     position: relative;
-    padding-top: 50px; /* Asegura un buen espacio superior al inicio */
+    overflow: hidden; /* Mantenemos hidden para el efecto visual, si el contenido crece, se recortará */
 }
 
-/* Efecto de orbes brillantes flotantes */
+@keyframes backgroundShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Orbes de fondo (ajustados a la imagen) */
 body::before, body::after {
     content: '';
-    position: fixed; /* Usa 'fixed' para que los orbes no se muevan al hacer scroll */
+    position: fixed;
     border-radius: 50%;
     filter: blur(80px); /* Un blur intenso para un efecto de brillo */
-    opacity: 0.6;
-    z-index: -1; /* Detrás del contenido */
-    animation: floatBlob 15s infinite ease-in-out alternate;
+    opacity: 0.5; /* Más sutil */
+    z-index: -1;
+    animation: floatBlob 20s infinite ease-in-out alternate;
 }
 
 body::before {
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
-    top: 10%;
-    left: 15%;
+    width: 300px; /* Más grande */
+    height: 300px;
+    background: radial-gradient(circle, #00e676 0%, transparent 70%); /* Verde */
+    top: 30%; /* Posición específica */
+    left: 10%;
     animation-delay: 0s;
 }
 
 body::after {
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
-    bottom: 10%;
-    right: 15%;
-    animation-delay: 7.5s;
+    width: 300px; /* Más grande */
+    height: 300px;
+    background: radial-gradient(circle, #ffc107 0%, transparent 70%); /* Amarillo */
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 10s;
 }
 
 @keyframes floatBlob {
     0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(20px, 30px) scale(1.05); }
+    50% { transform: translate(40px, 60px) scale(1.05); } /* Movimiento más amplio */
     100% { transform: translate(0, 0) scale(1); }
 }
 
-
 .card-container {
-    background: var(--bg-card);
-    backdrop-filter: blur(15px) brightness(1.2); /* Más desenfoque y un poco más de brillo */
-    -webkit-backdrop-filter: blur(15px) brightness(1.2);
-    border-radius: 20px; /* Bordes más redondeados */
-    box-shadow: var(--shadow-glass);
-    border: 2px solid var(--border-glass); /* Borde más pronunciado */
-    padding: 40px; /* Más padding */
+    background: rgba(0, 0, 0, 0.7); /* Fondo más oscuro y opaco */
+    backdrop-filter: blur(8px) brightness(1.2); /* Menos blur, más brillo */
+    -webkit-backdrop-filter: blur(8px) brightness(1.2);
+    border-radius: 15px; /* Ligeramente menos redondeado */
+    box-shadow: 0 0 25px rgba(0, 230, 118, 0.4); /* Sombra de la tarjeta verde neón */
+    border: 2px solid var(--card-border-green); /* Borde verde neón */
+    padding: 30px; /* Menos padding */
     width: 100%;
-    max-width: 450px; /* Un poco más ancho */
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición más fluida */
+    max-width: 500px; /* Ajuste el ancho según la imagen */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card-container:hover {
-    box-shadow: 0 15px 60px 0 rgba(0, 255, 128, 0.5); /* Sombra verde más prominente */
-    transform: translateY(-5px) scale(1.02); /* Efecto de elevación más notorio */
-    border: 2px solid var(--primary-color); /* Borde se ilumina de verde */
+    box-shadow: 0 0 40px rgba(0, 230, 118, 0.7); /* Sombra más intensa en hover */
+    transform: translateY(-2px) scale(1.01);
 }
 
 /* --- Encabezados y Títulos --- */
 header {
     text-align: center;
-    margin-bottom: 30px;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 25px;
 }
 
 h1 {
-    font-size: 2.8em; /* Tamaño de título más grande */
-    font-weight: 800; /* Más negrita */
-    color: var(--primary-color);
+    font-size: 2.5em; /* Ajuste de tamaño */
+    font-weight: 800;
+    color: var(--primary-green);
     margin: 0;
-    /* Efecto Neón Verde de Elphaba (MUY Radiante) */
-    text-shadow: 
-        0 0 15px var(--primary-color), 
-        0 0 30px rgba(0, 255, 128, 0.8), 
-        0 0 45px rgba(0, 255, 128, 0.6);
+    text-shadow: var(--shadow-neon-green);
     text-transform: capitalize; 
-    letter-spacing: 2px; /* Espaciado de letras para dramatismo */
+    letter-spacing: 1px;
 }
 
-p {
-    color: var(--secondary-color); /* Porcentaje en dorado */
-    font-weight: 600;
-    font-size: 1.1em;
-    margin-top: 10px;
+p { /* Para el texto 33% - 33% - 34% */
+    color: var(--text-light); /* En la imagen es blanco/claro */
+    font-weight: 500;
+    font-size: 1.0em;
+    margin-top: 5px;
+    text-shadow: none; /* Sin sombra para este texto */
 }
 
 h3, h4 {
-    color: var(--secondary-color); /* Títulos de sección en dorado */
-    font-weight: 700;
-    font-size: 1.2em;
-    border-bottom: 2px solid var(--border-glass); /* Borde más grueso */
-    padding-bottom: 10px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    color: var(--text-light); /* En la imagen son blancos/claros */
+    font-weight: 600;
+    font-size: 1.1em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Borde más sutil */
+    padding-bottom: 8px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    text-shadow: none;
 }
 
 /* --- Entradas de Formulario --- */
 .input-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 600;
-    font-size: 1em;
-    color: var(--primary-color); /* Labels en verde brillante */
-    text-shadow: 0 0 5px rgba(0, 255, 128, 0.4);
+    font-size: 0.95em;
+    color: var(--primary-green); /* Labels en verde neón */
+    text-shadow: 0 0 5px rgba(0, 230, 118, 0.4);
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 15px 18px; /* Más padding */
-    border: 2px solid var(--border-glass); /* Borde más grueso */
-    border-radius: 10px; /* Más redondeado */
+    padding: 12px 15px;
+    border: 2px solid var(--primary-green); /* Borde verde neón */
+    border-radius: 8px;
     box-sizing: border-box;
-    font-size: 1.1em; /* Texto más grande */
-    color: var(--text-dark);
-    background-color: rgba(255, 255, 255, 0.95); /* Menos transparencia para mejor legibilidad */
+    font-size: 1.05em;
+    color: var(--text-dark-input); /* Texto de input oscuro */
+    background-color: var(--input-bg-light); /* Fondo blanco */
     transition: all 0.3s;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra interna para profundidad */
 }
 
 input[type="text"]:focus {
-    border-color: var(--primary-color);
+    border-color: var(--primary-green);
     outline: none;
-    box-shadow: 0 0 15px var(--primary-color); /* Sombra de foco más intensa */
+    box-shadow: 0 0 10px var(--primary-green); /* Sombra de foco más intensa */
     background-color: #ffffff;
 }
 
-/* Mensajes de error */
-.error-message {
-    color: var(--danger-color);
-    font-size: 0.9em;
-    font-weight: 700;
-    margin-top: 8px;
-    display: block;
-    text-shadow: 0 0 8px rgba(255, 51, 102, 0.8); /* Sombra neón roja */
+/* Contenedor de mensajes de error (AJUSTE CLAVE para la disposición) */
+.error-messages-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--error-red);
+    text-shadow: var(--shadow-neon-red);
 }
+
+.error-message {
+    flex: 1; /* Ocupa espacio disponible */
+    text-align: left;
+    margin-right: 10px; /* Espacio entre ellos */
+}
+.error-message:last-child {
+    margin-right: 0;
+    text-align: right;
+}
+/* Asegúrate de que tus elementos de error tengan las clases correctas */
+/* Por ejemplo: <div class="error-messages-container"><span class="error-message">ERROR:</span><span class="error-message">OECNOW</span></div> */
+
 
 /* --- Botones --- */
 .btn {
     width: 100%;
-    padding: 16px; /* Más padding */
+    padding: 14px;
     border: none;
-    border-radius: 10px; /* Más redondeado */
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1.2em; /* Texto más grande */
-    font-weight: 800; /* Más negrita */
-    margin-top: 30px;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    letter-spacing: 1px;
-    background: rgba(255, 255, 255, 0.15); /* Fondo más transparente */
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    color: var(--text-color);
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-top: 25px; /* Ajuste de margen */
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 0.5px;
+    background: var(--primary-green); /* Botón principal verde neón */
+    color: var(--text-dark-input); /* Texto oscuro en el botón */
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.5); /* Sombra neón verde */
 }
 
-.primary-btn {
-    background: var(--primary-color); /* Botón principal en Verde Elphaba */
-    color: var(--text-dark);
-    box-shadow: 0 6px 20px rgba(0, 255, 128, 0.6); /* Sombra más fuerte */
-    border: none;
-}
-
-.primary-btn:hover {
-    background-color: #00e673; /* Un poco más claro en hover */
-    transform: translateY(-4px) scale(1.03); /* Efecto de elevación más pronunciado */
-    box-shadow: 0 10px 30px rgba(0, 255, 128, 0.9); /* Sombra más grande y brillante */
+.btn:hover {
+    background-color: #00b35e; /* Un poco más oscuro en hover */
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 230, 118, 0.8);
 }
 
 /* --- Resultado Final --- */
 .result-box {
-    text-align: center;
-    margin-top: 45px;
-    background: rgba(0, 0, 0, 0.2); /* Más oscuro */
-    backdrop-filter: blur(8px) brightness(1.1);
-    -webkit-backdrop-filter: blur(8px) brightness(1.1);
-    padding: 30px; /* Más padding */
-    border-radius: 15px; /* Más redondeado */
-    border: 2px solid var(--border-glass);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra interna para profundidad */
+    text-align: left; /* Alineado a la izquierda según la imagen */
+    margin-top: 35px;
+    background: rgba(0, 0, 0, 0.3); /* Fondo más transparente */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 20px; /* Menos padding */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde más sutil */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .final-score {
-    font-size: 4.5em; /* Tamaño de puntuación final más grande */
-    font-weight: 900; /* Ultra negrita */
-    line-height: 1.1;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-    text-shadow: 
-        0 0 15px var(--primary-color), 
-        0 0 30px rgba(0, 255, 128, 0.8), 
-        0 0 50px rgba(0, 255, 128, 0.6); /* Neón muy intenso */
+    font-size: 4em; /* Ajuste de tamaño */
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 5px;
+    color: var(--primary-green);
+    text-shadow: var(--shadow-neon-green);
+    display: inline-block; /* Para que quede junto al texto "Result:" */
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
-#notaNecesaria {
-    color: var(--primary-color);
+.result-text-group { /* Contenedor para "Result:" y el texto debajo del número */
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    color: var(--text-light);
+    font-size: 0.9em;
 }
 
-.message {
+.result-text-group p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+}
+
+.result-text-group span { /* Para los porcentajes y "Imposible" */
+    font-weight: 600;
+    color: var(--secondary-yellow); /* Porcentaje en amarillo */
+    text-shadow: var(--shadow-neon-yellow);
+}
+
+/* Mensaje final de exito/imposible (al pie del result-box) */
+.final-message-container { /* Un nuevo contenedor para este mensaje */
+    text-align: center;
+    margin-top: 20px;
     font-weight: 700;
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 1.1em;
-    color: var(--text-color);
-    background-color: rgba(0, 0, 0, 0.4); /* Fondo de mensaje más oscuro */
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    font-size: 1.2em;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--primary-green);
+    text-shadow: var(--shadow-neon-green);
+    border: 1px solid var(--primary-green);
 }
+
 
 /* Estilos condicionales para el mensaje */
 #mensajeNecesaria[style*="#ffd700"] { /* Éxito (Oro Intenso) */
-    color: var(--secondary-color) !important;
-    text-shadow: 0 0 10px var(--secondary-color), 0 0 20px rgba(255, 215, 0, 0.8);
+    color: var(--secondary-yellow) !important;
+    text-shadow: var(--shadow-neon-yellow);
 }
-#mensajeNecesaria[style*="#ff3366"] { /* Imposible (Rosa/Rojo Neón) */
-    color: var(--danger-color) !important;
-    text-shadow: 0 0 10px var(--danger-color), 0 0 20px rgba(255, 51, 102, 0.8);
+#mensajeNecesaria[style*="#ff3333"] { /* Imposible (Rojo Neón) */
+    color: var(--error-red) !important;
+    text-shadow: var(--shadow-neon-red);
 }
 
 /* --- Cálculos Auxiliares --- */
 .goal-calc p {
     text-align: center;
-    margin-top: 20px;
-    font-size: 1.1em;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    margin-top: 15px;
+    font-size: 1em;
+    color: var(--text-light);
 }
 
 #notaFinalMaxima, #notaFinalMinima {
-    color: var(--secondary-color); /* Valores en dorado */
-    font-weight: 800;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+    color: var(--primary-green); /* En verde neón */
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 230, 118, 0.4);
 }
 
 hr {
-    margin: 40px 0; /* Más espacio */
+    margin: 30px 0;
     border: 0;
-    border-top: 2px solid var(--border-glass); /* Línea más gruesa */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); /* Sombra para la línea */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }

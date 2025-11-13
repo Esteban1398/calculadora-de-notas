@@ -16,19 +16,20 @@
         </header>
         
         <section class="corte-inputs">
+            
             <div class="input-group">
                 <label for="corte1">Nota Corte 1</label>
                 <input type="text" id="corte1" value="0.0" oninput="validarYLimpiar(this)">
-                </div>
+            </div>
 
             <div class="input-group">
                 <label for="corte2">Nota Corte 2</label>
                 <input type="text" id="corte2" value="0.0" oninput="validarYLimpiar(this)">
-                </div>
+            </div>
             
             <div class="error-messages-container">
-                <span class="error-message" id="error-corte1">ERROR</span>
-                <span class="error-message" id="error-corte2">ERROR</span>
+                <span class="error-message" id="error-corte1"></span>
+                <span class="error-message" id="error-corte2"></span>
             </div>
             
             <button class="btn primary-btn" onclick="calcularTodo()">Calcular Nota Necesaria</button>
@@ -39,9 +40,9 @@
             <span class="final-score" id="notaNecesaria">0.00</span>
             
             <div class="result-text-group">
-                <p>Result:</p>
-                <p><span>0.00% esto lograste en tu ultimo corte</span> <span>pasaste</span></p>
-                <p><span>0.00 último corte!</span> <span id="imposible-text" style="color:var(--error-red);">Imposible</span></p>
+                <p><span>Necesitas:</span></p> 
+                <p><span id="result-line-1"></span> <span id="result-line-2"></span></p>
+                <p><span id="result-line-3"></span> <span id="imposible-text"></span></p>
             </div>
             
             <div class="final-message-container">

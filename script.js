@@ -29,18 +29,15 @@ function validarYLimpiar(inputElement) {
     const rawValue = inputElement.value.trim();
     const value = parseFloat(rawValue);
 
-    // 1. No mostrar error si el campo está vacío (mientras se escribe)
     if (rawValue === "") {
         errorElement.textContent = "";
         return;
     }
 
-    // 2. Mostrar error si no es un número, es negativo, o está fuera de rango (0 a 5)
     if (isNaN(value) || value < NOTA_MINIMA || value > NOTA_MAXIMA) {
         errorElement.textContent = ERROR_MENSAJE;
         errorElement.style.color = getCssVariable('--danger-color');
     } else {
-        // Limpia el contenido si es válido
         errorElement.textContent = "";
     }
 }
@@ -52,32 +49,35 @@ function validarYLimpiar(inputElement) {
  * Función principal para calcular la nota necesaria para el 3.0 y los promedios generales.
  */
 function calcularTodo() {
-    // Resetear mensajes de error (Ahora se dejan vacíos)
+    // Resetear mensajes de error
     document.getElementById('error-corte1').textContent = '';
     document.getElementById('error-corte2').textContent = '';
 
     // Elementos del resultado
-    const notaNecesariaSpan = document.getElementById('notaNecesaria'); // El número grande
-    const mensajeNecesariaP = document.getElementById('mensajeNecesaria'); // El mensaje en el contenedor inferior
+    const requiredLabel = document.getElementById('required-label'); // NUEVO
+    const notaNecesariaSpan = document.getElementById('notaNecesaria');
+    const mensajeNecesariaP = document.getElementById('mensajeNecesaria');
     const notaFinalMaximaSpan = document.getElementById('notaFinalMaxima');
     const notaFinalMinimaSpan = document.getElementById('notaFinalMinima');
     const notaActualSpan = document.getElementById('notaActual');
 
     // Elementos del texto de resultado complejo (lado derecho)
-    const resultLine1 = document.getElementById('result-line-1'); // Necesitas:
-    const resultLine2 = document.getElementById('result-line-2'); // Línea 2
-    const resultLine3 = document.getElementById('result-line-3'); // Línea 3
+    // Se ajusta el query para reflejar la nueva estructura de 2 líneas
+    const resultLine2 = document.querySelector('.result-text-group p:nth-child(1) span:nth-child(1)');
+    const resultLine3 = document.querySelector('.result-text-group p:nth-child(1) span:nth-child(2)');
+    const resultLine4 = document.querySelector('.result-text-group p:nth-child(2) span:nth-child(1)');
     const imposibleSpan = document.getElementById('imposible-text');
 
     // Resetear resultados
+    requiredLabel.textContent = ''; // Se oculta en el reset
     notaNecesariaSpan.textContent = '0.00';
     mensajeNecesariaP.textContent = 'Ingresa tus notas para calcular.';
     notaFinalMaximaSpan.textContent = '0.00';
     notaFinalMinimaSpan.textContent = '0.00';
     notaActualSpan.textContent = '0.00';
-    resultLine1.textContent = '';
     resultLine2.textContent = '';
     resultLine3.textContent = '';
+    resultLine4.textContent = '';
     imposibleSpan.textContent = '';
 
 
@@ -92,26 +92,16 @@ function calcularTodo() {
     let hayError = false;
 
     // 3. Validación estricta antes de calcular (para el botón)
-
-    // VALIDACIÓN DE CORTE 1
-    if (rawN1 === "") {
-        document.getElementById('error-corte1').textContent = ERROR_VACIO;
-        hayError = true;
-    } else if (isNaN(n1) || n1 < NOTA_MINIMA || n1 > NOTA_MAXIMA) {
-        document.getElementById('error-corte1').textContent = ERROR_MENSAJE;
+    if (rawN1 === "" || isNaN(n1) || n1 < NOTA_MINIMA || n1 > NOTA_MAXIMA) {
+        document.getElementById('error-corte1').textContent = (rawN1 === "") ? ERROR_VACIO : ERROR_MENSAJE;
         hayError = true;
     }
     
-    // VALIDACIÓN DE CORTE 2
-    if (rawN2 === "") {
-        document.getElementById('error-corte2').textContent = ERROR_VACIO;
-        hayError = true;
-    } else if (isNaN(n2) || n2 < NOTA_MINIMA || n2 > NOTA_MAXIMA) {
-        document.getElementById('error-corte2').textContent = ERROR_MENSAJE;
+    if (rawN2 === "" || isNaN(n2) || n2 < NOTA_MINIMA || n2 > NOTA_MAXIMA) {
+        document.getElementById('error-corte2').textContent = (rawN2 === "") ? ERROR_VACIO : ERROR_MENSAJE;
         hayError = true;
     }
     
-    // Si hay error, detenemos la ejecución de la función y pintamos el texto de error en rojo
     if (hayError) {
         document.getElementById('error-corte1').style.color = getCssVariable('--danger-color');
         document.getElementById('error-corte2').style.color = getCssVariable('--danger-color');
@@ -142,14 +132,15 @@ function calcularTodo() {
         mensajeNecesariaP.textContent = `¡Imposible! Necesitas una nota superior a 5.0.`;
         
         // Estilos y mensajes
+        requiredLabel.textContent = 'Requiere:';
         notaNecesariaSpan.style.color = getCssVariable('--danger-color');
         mensajeNecesariaP.style.color = getCssVariable('--danger-color');
         mensajeNecesariaP.style.textShadow = getCssVariable('--shadow-neon-red');
         
         // Texto de resultado complejo
-        resultLine1.textContent = `Se requiere una nota de ${notaExcesiva}`;
-        resultLine2.textContent = ``; // Se deja vacío para alineación visual
-        resultLine3.textContent = `Nota requerida > 5.00`;
+        resultLine2.textContent = `Se requiere una nota de ${notaExcesiva}`;
+        resultLine3.textContent = ``;
+        resultLine4.textContent = `Nota requerida > 5.00`;
         imposibleSpan.textContent = 'Imposible';
         imposibleSpan.style.color = getCssVariable('--danger-color');
         imposibleSpan.style.textShadow = getCssVariable('--shadow-neon-red');
@@ -160,14 +151,15 @@ function calcularTodo() {
         mensajeNecesariaP.textContent = `¡Ya Aprobaste! Tu nota es suficiente.`;
         
         // Estilos y mensajes
+        requiredLabel.textContent = ''; // Se oculta en este estado
         notaNecesariaSpan.style.color = getCssVariable('--primary-green');
         mensajeNecesariaP.style.color = getCssVariable('--primary-green');
         mensajeNecesariaP.style.textShadow = getCssVariable('--shadow-neon-green');
         
         // Texto de resultado complejo
-        resultLine1.textContent = `¡Aprobación asegurada!`;
-        resultLine2.textContent = ``;
-        resultLine3.textContent = `Nota requerida: 0.00`;
+        resultLine2.textContent = `¡Aprobación asegurada!`;
+        resultLine3.textContent = ``;
+        resultLine4.textContent = `Nota requerida: 0.00`;
         imposibleSpan.textContent = '¡Éxito!';
         imposibleSpan.style.color = getCssVariable('--secondary-yellow');
         imposibleSpan.style.textShadow = getCssVariable('--shadow-neon-yellow');
@@ -179,15 +171,16 @@ function calcularTodo() {
         mensajeNecesariaP.textContent = `¡Lo lograste en the último corte! (${notaRequeridaFixed})`;
         
         // Estilos y mensajes
+        requiredLabel.textContent = 'Necesitas:'; // Se muestra en estado normal
         notaNecesariaSpan.style.color = getCssVariable('--primary-green');
         mensajeNecesariaP.style.color = getCssVariable('--primary-green');
         mensajeNecesariaP.style.textShadow = getCssVariable('--shadow-neon-green');
 
         // Texto de resultado complejo
-        resultLine1.textContent = `Necesitas el ${notaRequeridaFixed} en el Corte 3.`;
-        resultLine2.textContent = ``;
-        resultLine3.textContent = `Máximo posible: ${notaFinalMaxima.toFixed(2)}`;
-        imposibleSpan.textContent = 'A calcular'; // Placeholder neutral
+        resultLine2.textContent = `Necesitas el ${notaRequeridaFixed} en el Corte 3.`;
+        resultLine3.textContent = ``;
+        resultLine4.textContent = `Máximo posible: ${notaFinalMaxima.toFixed(2)}`;
+        imposibleSpan.textContent = 'A calcular';
         imposibleSpan.style.color = getCssVariable('--secondary-yellow');
         imposibleSpan.style.textShadow = getCssVariable('--shadow-neon-yellow');
     }
@@ -195,10 +188,10 @@ function calcularTodo() {
 
 // Inicializar los campos con 0.0 al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    // Es importante que el valor inicial sea '0.0' para evitar que se considere vacío al cargar
     document.getElementById('corte1').value = '0.0'; 
     document.getElementById('corte2').value = '0.0';
-    // Inicializa el texto de error vacío
+    // Inicializa el texto de error y la etiqueta necesarios
     document.getElementById('error-corte1').textContent = ''; 
     document.getElementById('error-corte2').textContent = '';
+    document.getElementById('required-label').textContent = '';
 });
